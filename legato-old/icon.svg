@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Legato's icon: its own intro (the keys) and mark (three bars), in its colors. Used by the tab and by my command center -->
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="38%" r="70%"><stop offset="0" stop-color="#FBF5E6"/><stop offset=".7" stop-color="#F4EBD3"/><stop offset="1" stop-color="#DED3C4"/></radialGradient>
+    <linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFDF7"/><stop offset="1" stop-color="#EFE8D8"/></linearGradient>
+    <linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2C2C32"/><stop offset="1" stop-color="#141417"/></linearGradient>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#555879" flood-opacity=".28"/></filter>
+  </defs>
+  <rect width="128" height="128" fill="url(#bg)"/>
+  <!-- the mark -->
+  <g filter="url(#sh)">
+    <rect x="45" y="15" width="38" height="38" rx="11" fill="#555879"/>
+    <rect x="54.5" y="31" width="5" height="16" rx="1.5" fill="#FFFCF4"/>
+    <rect x="61.5" y="25" width="5" height="22" rx="1.5" fill="#FFFCF4"/>
+    <rect x="68.5" y="35" width="5" height="12" rx="1.5" fill="#FFFCF4"/>
+  </g>
+  <!-- the keys: C D E F G A -->
+  <g filter="url(#sh)">
+    <path d="M21 64h13v38a4 4 0 0 1-4 4h-5a4 4 0 0 1-4-4z" fill="url(#w)"/>
+    <path d="M35.5 64h13v38a4 4 0 0 1-4 4h-5a4 4 0 0 1-4-4z" fill="url(#w)"/>
+    <path d="M50 64h13v38a4 4 0 0 1-4 4h-5a4 4 0 0 1-4-4z" fill="url(#w)"/>
+    <path d="M64.5 64h13v38a4 4 0 0 1-4 4h-5a4 4 0 0 1-4-4z" fill="url(#w)"/>
+    <path d="M79 64h13v38a4 4 0 0 1-4 4h-5a4 4 0 0 1-4-4z" fill="url(#w)"/>
+    <path d="M93.5 64h13v38a4 4 0 0 1-4 4h-5a4 4 0 0 1-4-4z" fill="url(#w)"/>
+    <path d="M30 64h8.5v23a2.5 2.5 0 0 1-2.5 2.5h-3.5a2.5 2.5 0 0 1-2.5-2.5z" fill="url(#b)"/>
+    <path d="M44.5 64h8.5v23a2.5 2.5 0 0 1-2.5 2.5h-3.5a2.5 2.5 0 0 1-2.5-2.5z" fill="url(#b)"/>
+    <path d="M73.5 64h8.5v23a2.5 2.5 0 0 1-2.5 2.5h-3.5a2.5 2.5 0 0 1-2.5-2.5z" fill="url(#b)"/>
+    <path d="M88 64h8.5v23a2.5 2.5 0 0 1-2.5 2.5h-3.5a2.5 2.5 0 0 1-2.5-2.5z" fill="url(#b)"/>
+  </g>
+  <rect x="21" y="62" width="85.5" height="3" rx="1.5" fill="#555879" opacity=".85"/>
+</svg>
