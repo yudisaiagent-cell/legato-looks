@@ -3,64 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Legato · שלושה כיוונים</title>
+<title>Legato · לילה, שלב 1</title>
 <style>
-  body { margin: 0; background: #fff; color: #1f201d; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  body { margin: 0; background: #000; color: #fff; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
   main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
   h1 { font-size: 26px; line-height: 1.2; margin: 0 0 6px; }
-  .sub { color: #636361; margin: 0 0 28px; }
-  section { margin-bottom: 48px; }
-  h2 { font-size: 22px; margin: 0; }
-  .pair { color: #636361; margin: 2px 0 6px; }
-  .line { margin: 0 0 14px; }
-  .shots { display: grid; gap: 14px; }
-  img { width: 100%; display: block; border-radius: 16px; background: #eee; }
-  .label { font-size: 14px; color: #636361; margin: 0 0 6px; }
-  @media (min-width: 800px) { .shots { grid-template-columns: 1fr 1fr; align-items: start; } }
+  .sub { color: #b4b4b4; margin: 0 0 28px; }
+  section { margin-bottom: 44px; }
+  h2 { font-size: 20px; margin: 0 0 4px; }
+  .line { color: #b4b4b4; margin: 0 0 14px; }
+  .shots { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; align-items: start; }
+  .one { grid-template-columns: 1fr; }
+  img { width: 100%; display: block; border-radius: 14px; background: #111; }
+  a { color: #e2b04a; }
+  @media (min-width: 800px) { .shots { grid-template-columns: repeat(4, 1fr); } }
 </style>
 </head>
 <body>
 <main>
-  <h1>שלושה כיוונים ל-Legato</h1>
-  <p class="sub">אותו קורס ואותה התקדמות (דרגה 3, באמצע פרק). לכל כיוון: מסך הבית המלא, ומסך של שיעור.</p>
+  <h1>לילה · שלב 1</h1>
+  <p class="sub">כל האתר בצבעים ובגופן של לילה, ומסך הבית החדש. שאר המסכים כבר בצבעים החדשים, ויקבלו עיצוב משלהם בשלבים הבאים.</p>
 
   <section>
-    <h2>השוואה</h2>
-    <p class="pair">שלושתם זה לצד זה, מסך בית ושיעור</p>
-    <img src="compare.png" alt="שלושת הכיוונים זה לצד זה">
+    <h2>מסך הבית</h2>
+    <p class="line">באמצע דרגה 3. "מתנגן עכשיו", הבא בתור, והספרייה של עשר הדרגות.</p>
+    <div class="shots one"><img src="night1-home-full.png" alt="מסך הבית, כל הגלילה"></div>
   </section>
 
   <section>
-    <h2>1 · לילה</h2>
-    <p class="pair">Apple Music × Farfetch</p>
-    <p class="line">שחור מלא. כל העטיפות בשחור-לבן, והאלבום שמתנגן עכשיו בצבע. כפתור לבן, ונגיעה של פליז על הקלידים.</p>
+    <h2>מצבים של מסך הבית</h2>
+    <p class="line">מימין לשמאל: באמצע דרגה · דרגה שנגמרה ומחכה למבחן (שורת המבחן מתחת ל"מתנגן עכשיו") · חשבון חדש.</p>
     <div class="shots">
-      <div><p class="label">מסך הבית</p><img src="night-home-full.png" alt="לילה, מסך הבית" loading="lazy"></div>
-      <div><p class="label">שיעור</p><img src="night-lesson.png" alt="לילה, שיעור" loading="lazy"></div>
+      <img src="night1-home.png" alt="באמצע דרגה">
+      <img src="night1-home-exam.png" alt="מבחן מחכה">
+      <img src="night1-home-new.png" alt="חשבון חדש">
     </div>
   </section>
 
   <section>
-    <h2>2 · מגזין</h2>
-    <p class="pair">Farfetch × Locket</p>
-    <p class="line">דף לבן, ברכה בכתב אלגנטי, השיעור הבא כתמונה עם כיתוב עליה, ושורת "השבוע".</p>
+    <h2>שאר המסכים, בצבעים החדשים</h2>
+    <p class="line">שיעור הסבר · שיר · הישגים · מילון · מקלדת חופשית · הגדרות (בלי בחירת מצב בהיר/כהה: יש עכשיו מצב אחד).</p>
     <div class="shots">
-      <div><p class="label">מסך הבית</p><img src="editorial-home-full.png" alt="מגזין, מסך הבית" loading="lazy"></div>
-      <div><p class="label">שיעור</p><img src="editorial-lesson.png" alt="מגזין, שיעור" loading="lazy"></div>
+      <img src="night1-lesson.png" alt="שיעור" loading="lazy">
+      <img src="night1-song.png" alt="שיר" loading="lazy">
+      <img src="night1-achievements.png" alt="הישגים" loading="lazy">
+      <img src="night1-glossary.png" alt="מילון" loading="lazy">
+      <img src="night1-piano.png" alt="מקלדת חופשית" loading="lazy">
+      <img src="night1-settings.png" alt="הגדרות" loading="lazy">
     </div>
   </section>
 
-  <section>
-    <h2>3 · פלייליסט</h2>
-    <p class="pair">Apple Music × Locket</p>
-    <p class="line">כל אלבום בצבע מתוך התמונה שלו, פינות עגולות וגופן עגול. גם השיעור נצבע בצבע של האלבום.</p>
-    <div class="shots">
-      <div><p class="label">מסך הבית</p><img src="pastel-home-full.png" alt="פלייליסט, מסך הבית" loading="lazy"></div>
-      <div><p class="label">שיעור</p><img src="pastel-lesson.png" alt="פלייליסט, שיעור" loading="lazy"></div>
-    </div>
-  </section>
-
-  <p class="sub">תמונות העטיפה: ארכיונים פתוחים (Wikimedia Commons ועוד), ברישיונות שמתירים שימוש.</p>
+  <p class="sub"><a href="trials.html">שלושת הכיוונים שהשווינו</a></p>
 </main>
 </body>
 </html>
