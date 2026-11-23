@@ -1,0 +1,820 @@
+<!doctype html><html lang="he" dir="rtl" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>כ״ט י״ב תשצ״ג: שמש, ארץ וירח בתלת־ממד</title><meta name="description" content="האסטרונומיה של קידוש החודש: מולד, ראיית הלבנה, אורך החודש והעיבור, עם דגם תלת־ממדי של השמש, כדור הארץ והירח."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>:root {
+  --charcoal: #161616;
+  --sunset: #d71e1e;
+  --sunset-pale: #ffffff;
+  --sunset-dark: #120500;
+  --gold: #ffcf3a;
+  --dusk: #1f44b8;
+  --night: #0b1533;
+  --silver: #e3e6ec;
+  --ink-dark: #141414;
+  --ink-light: #ffffff;
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
+  --step-display: clamp(110px, 15vw, 230px);
+  --m: clamp(16px, 2.4vw, 40px);
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; background: var(--charcoal); color: var(--ink-light); font: 400 var(--step-body)/1.55 Heebo, system-ui, -apple-system, "Segoe UI", sans-serif; letter-spacing: -0.005em; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.035em; line-height: 0.95; text-wrap: balance; }
+h2 { font-size: var(--step-head); }
+h3 { font-size: var(--step-head); }
+p { margin: 0; text-wrap: pretty; }
+.wrap { padding-inline: var(--m); }
+:focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+
+/* fields */
+.f-sunset { background: var(--sunset); color: #fff; }
+.f-gold { background: var(--gold); color: var(--ink-dark); }
+.f-dusk { background: var(--dusk); color: var(--ink-light); }
+.f-night { background: var(--night); color: var(--ink-light); }
+.f-silver { background: var(--silver); color: var(--ink-dark); }
+.f-charcoal { background: var(--charcoal); color: var(--ink-light); }
+
+/* the one button */
+.btn { display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; background: var(--charcoal); color: #fff; text-decoration: none; font-weight: 600; font-size: var(--step-body); border: 0; transition: transform .2s var(--ease), background-color .2s; }
+.btn:hover { background: #000; transform: translateY(-2px); }
+.btn:active { transform: translateY(1px) scale(.98); }
+.link { text-decoration: underline; text-underline-offset: .2em; text-decoration-thickness: 2px; transition: opacity .2s; }
+.link:hover { opacity: .7; }
+
+/* hero */
+.hero { position: relative; min-height: 100svh; display: grid; grid-template-rows: auto 1fr; padding: 24px var(--m) 40px; overflow: hidden; }
+.bar { display: flex; align-items: center; gap: 28px; font-size: var(--step-small); font-weight: 500; }
+.bar .mark { font-weight: 700; font-size: var(--step-body); text-decoration: none; margin-inline-end: auto; }
+.bar a:not(.mark):not(.btn) { text-decoration: none; }
+.bar a:not(.mark):not(.btn):hover { text-decoration: underline; }
+.bar .btn { min-height: 44px; padding: 0 18px; font-size: var(--step-small); }
+.hero-body { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-content: start; padding-top: 9vh; }
+.hero h1 { grid-column: 1 / -1; font-size: var(--step-display); line-height: 0.84; letter-spacing: -0.045em; }
+.hero h1 .l { display: block; overflow: hidden; padding-bottom: .04em; }
+.hero h1 .l > span { display: block; }
+.hero h1 .l1 { color: var(--sunset-pale); }
+.hero h1 .l2 { color: var(--sunset-dark); }
+.hero-lead { grid-column: 1 / span 5; margin-top: 40px; font-size: var(--step-lead); line-height: 1.35; font-weight: 500; max-width: 30ch; }
+.hero-act { grid-column: 1 / span 5; margin-top: 28px; }
+.hero-scene { grid-column: 7 / -1; grid-row: 2 / span 3; margin-top: 12px; position: relative; height: min(52svh, 560px); touch-action: pan-y; cursor: grab; }
+.sc-gl, .sc-over { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.sc-over { pointer-events: none; }
+
+/* the month, pinned */
+.story { position: relative; height: 320svh; }
+.stage { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; padding: 40px var(--m); transition: background-color .5s var(--ease), color .5s var(--ease); }
+.stage[data-field="gold"] { background: var(--gold); color: var(--ink-dark); }
+.stage[data-field="dusk"] { background: var(--dusk); color: var(--ink-light); }
+.stage[data-field="silver"] { background: var(--silver); color: var(--ink-dark); }
+.stage[data-field="night"] { background: var(--night); color: var(--ink-light); }
+.stage[data-field="sunset"] { background: var(--sunset); color: #fff; }
+.stage-text { grid-column: 1 / span 4; display: grid; grid-template-rows: auto 1fr; padding-top: 2vh; }
+.stage-text h2 { font-size: var(--step-lead); letter-spacing: -0.01em; font-weight: 600; line-height: 1.2; }
+.steps { position: relative; align-self: center; }
+.step { transition: opacity .45s var(--ease), transform .45s var(--ease); }
+.js .step { position: absolute; inset-inline: 0; top: 50%; transform: translateY(calc(-50% + 24px)); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .45s var(--ease), transform .45s var(--ease), visibility 0s .45s; }
+.js .step.on { opacity: 1; visibility: visible; transform: translateY(-50%); pointer-events: auto; transition: opacity .45s var(--ease), transform .45s var(--ease), visibility 0s; }
+.step .day { font-size: var(--step-lead); font-weight: 600; margin-bottom: 14px; font-variant-numeric: tabular-nums; }
+.step h3 { margin-bottom: 22px; }
+.step p { font-size: var(--step-body); max-width: 34ch; }
+.stage-scene { grid-column: 5 / -1; position: relative; touch-action: pan-y; cursor: grab; }
+.no-js .story { height: auto; }
+.no-js .stage { position: static; height: auto; }
+
+/* seen from here */
+.band { padding: 160px var(--m) 120px; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; row-gap: 40px; align-items: end; }
+.band h2 { grid-column: 1 / -1; }
+.band figure { margin: 0; }
+.band .clip { grid-column: 1 / span 5; }
+.band .photo { grid-column: 6 / -1; }
+.band video, .band .photo img { display: block; width: 100%; height: auto; }
+.band video { aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 58%; transform: scale(1.08); }
+.band .clip { overflow: hidden; }
+.band figcaption { margin-top: 12px; font-size: var(--step-small); max-width: 46ch; }
+
+/* the count */
+.count { padding: 120px var(--m) 160px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 8px; align-items: start; }
+.tile { padding: 28px; display: flex; flex-direction: column; justify-content: space-between; }
+.tile b { font-size: var(--step-head); line-height: .95; letter-spacing: -0.04em; font-weight: 700; }
+.tile span { font-size: var(--step-body); max-width: 28ch; }
+.tile-a { grid-column: 1 / span 6; grid-row: 1 / span 2; height: 70vh; background: var(--gold); color: var(--ink-dark); }
+.tile-b { grid-column: 7 / span 3; margin-top: 14vh; height: 44vh; background: var(--ink-light); color: var(--ink-dark); }
+.tile-c { grid-column: 10 / span 3; margin-top: 26vh; height: 34vh; background: var(--dusk); color: var(--ink-light); }
+.count h2 { grid-column: 7 / span 6; grid-row: 1; align-self: start; font-size: var(--step-lead); letter-spacing: -0.01em; line-height: 1.2; font-weight: 600; max-width: 18ch; }
+
+/* why 29.5 */
+.why { padding: 160px var(--m); display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; align-items: center; }
+.why-text { grid-column: 1 / span 5; }
+.why h2 { margin-bottom: 40px; }
+.why .statement { font-size: var(--step-lead); line-height: 1.35; font-weight: 500; max-width: 26ch; }
+.why .statement + p { margin-top: 24px; max-width: 40ch; }
+.why figure { grid-column: 7 / -1; margin: 0; }
+.why figcaption { margin-top: 12px; font-size: var(--step-small); }
+
+/* from molad to rosh chodesh */
+.road { padding: 120px var(--m) 160px; }
+.road-intro { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; margin-bottom: 64px; }
+.road-intro h2 { grid-column: 1 / span 5; }
+.road-intro p { grid-column: 7 / span 5; font-size: var(--step-body); }
+.acc { display: flex; height: 540px; }
+.panel { position: relative; flex: 0 0 8.4%; overflow: hidden; transition: flex-basis .45s var(--ease); }
+.panel.open { flex: 1 1 58%; }
+.panel > button { all: unset; position: absolute; inset: 0; cursor: pointer; }
+.panel > button:focus-visible { outline: 3px solid currentColor; outline-offset: -6px; }
+.panel .name { position: absolute; bottom: 24px; inset-inline-start: 50%; transform: translateX(50%) rotate(-90deg); transform-origin: center; white-space: nowrap; font-weight: 700; font-size: var(--step-lead); }
+.panel.open .name { position: static; transform: none; display: block; font-size: var(--step-head); line-height: .95; letter-spacing: -0.035em; padding: 28px 28px 0; }
+.panel .body { position: absolute; inset-inline-start: 28px; bottom: 28px; width: min(36ch, 44%); font-size: var(--step-body); opacity: 0; visibility: hidden; transition: opacity .3s .15s, visibility 0s .3s; }
+.panel.open .body { opacity: 1; visibility: visible; transition: opacity .3s .15s, visibility 0s; }
+.panel img { position: absolute; inset-inline-end: 0; top: 0; width: 46%; height: 100%; object-fit: cover; object-position: 22% 28%; opacity: 0; visibility: hidden; transition: opacity .35s .1s, visibility 0s .35s; }
+.panel.open img { opacity: 1; visibility: visible; transition: opacity .35s .1s, visibility 0s; }
+.p1 { background: #0b1533; color: #fff; }
+.p2 { background: #13286c; color: #fff; }
+.p3 { background: #1f44b8; color: #fff; }
+.p4 { background: #4f74e3; color: #fff; }
+.p5 { background: #9db3f3; color: var(--ink-dark); }
+.p6 { background: #d9e2fb; color: var(--ink-dark); }
+
+/* mazalot */
+.zod { padding: 160px var(--m); }
+.zod-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 56px; }
+.zod-head p { font-size: var(--step-body); font-variant-numeric: tabular-nums; }
+.zod ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; row-gap: 36px; }
+.zod li { display: grid; grid-template-columns: 120px 1fr; column-gap: 20px; align-items: start; }
+.zod li img { width: 120px; height: 84px; object-fit: cover; mix-blend-mode: multiply; }
+.zod .row { display: flex; justify-content: space-between; gap: 12px; font-size: var(--step-body); }
+.zod .row b { font-weight: 700; }
+.zod li p { font-size: var(--step-body); max-width: 40ch; margin-top: 2px; }
+.zod li:nth-child(1) .row span, .zod li:nth-child(4) .row span, .zod li:nth-child(7) .row span, .zod li:nth-child(10) .row span { font-weight: 700; }
+
+/* the years */
+.years { padding: 160px 24px; }
+.years h2 { margin-bottom: 48px; padding-inline: 0; }
+.years .cols { columns: 2; column-gap: 32px; font-size: var(--step-lead); line-height: 1.4; font-weight: 400; text-align: justify; hyphens: auto; color: #fff; }
+.years .cols strong { color: #fff; font-weight: 700; }
+.hl { padding: 0 .1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; color: var(--ink-dark); }
+.hl-gold { background: var(--gold); }
+.hl-sun { background: var(--sunset); }
+.hl-silver { background: var(--silver); }
+.hl-dusk { background: var(--dusk); color: #fff; }
+.hl-link { background: var(--gold); color: var(--ink-dark); text-decoration: none; font-weight: 700; }
+.hl-link:hover { background: #fff; }
+
+/* footer */
+.foot { padding: 64px var(--m) 32px; display: grid; grid-template-columns: minmax(0, 1fr); overflow: hidden; }
+.foot .name { font-size: var(--step-display); font-weight: 800; letter-spacing: -0.05em; line-height: .86; white-space: nowrap; }
+.foot-row { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 24px; margin-top: 72px; }
+.places { grid-column: 1 / span 5; display: grid; gap: 6px; }
+.places a { font-size: var(--step-lead); font-weight: 600; text-decoration: none; letter-spacing: -0.02em; }
+.places a:hover { text-decoration: underline; }
+.credits { grid-column: 7 / -1; font-size: var(--step-body); line-height: 1.5; }
+.credits p + p { margin-top: 6px; }
+.credits bdi a, .credits a { text-underline-offset: .15em; }
+.legal { display: flex; justify-content: space-between; gap: 16px; font-size: var(--step-small); margin-top: 120px; }
+
+/* entrances */
+.js [data-rise] { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: var(--d, 0ms); }
+.js [data-rise].in { opacity: 1; transform: none; }
+@keyframes lineUp { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.hero h1 .l > span { animation: lineUp .9s var(--ease) both; }
+.hero h1 .l2 > span { animation-delay: .11s; }
+.hero-lead, .hero-act { animation: fadeUp .7s .55s var(--ease) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .l > span, .hero-lead, .hero-act { animation: none; }
+  .js [data-rise] { opacity: 1; transform: none; transition: none; }
+  .step, .panel, .panel .body, .panel img, .stage { transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* phone */
+@media (max-width: 760px) {
+  .bar { gap: 16px; }
+  .bar .hide-s { display: none; }
+  .hero { padding: 16px 16px 24px; }
+  .hero-body { display: block; padding-top: 8vh; }
+  .hero h1 { font-size: 21vw; }
+  .hero-lead { margin-top: 32px; }
+  .hero-scene { height: 92vw; margin-top: 8px; }
+  .hero-act { margin-top: 16px; }
+  .stage { display: flex; flex-direction: column; padding: 20px 16px 24px; }
+  .stage-scene { order: -1; flex: 1 1 auto; min-height: 0; }
+  .stage-text { flex: 0 0 auto; display: block; padding-top: 0; }
+  .stage-text h2 { margin-bottom: 8px; font-size: var(--step-body); }
+  .steps { min-height: 200px; }
+  .step h3 { margin-bottom: 10px; }
+  .step .day { margin-bottom: 6px; font-size: var(--step-body); }
+  .count { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 120px 16px; }
+  .count h2 { grid-column: 1 / -1; grid-row: auto; margin-bottom: 20px; }
+  .tile-a { grid-column: 1 / -1; grid-row: auto; height: 56vw; }
+  .tile-b { grid-column: 1; margin-top: 0; height: 52vw; }
+  .tile-c { grid-column: 2; margin-top: 32px; height: 52vw; }
+  .tile { padding: 18px; }
+  .why, .road, .zod, .band { padding: 120px 16px; }
+  .band { display: block; }
+  .band h2 { margin-bottom: 32px; }
+  .band .photo { margin-top: 32px; }
+  .why { display: block; }
+  .why figure { margin-top: 48px; }
+  .road-intro { display: block; margin-bottom: 32px; }
+  .road-intro p { margin-top: 20px; }
+  .acc { flex-direction: column; height: auto; }
+  .panel, .panel.open { flex: none; }
+  .panel > button { position: static; display: block; width: 100%; min-height: 64px; }
+  .panel .name { position: static; transform: none; display: block; padding: 20px 16px; font-size: var(--step-body); }
+  .panel.open .name { padding: 20px 16px 8px; font-size: var(--step-head); }
+  .panel .body, .panel img { display: none; position: static; width: auto; height: auto; }
+  .panel.open .body { display: block; opacity: 1; padding: 0 16px 20px; width: auto; }
+  .panel.open img { display: block; opacity: 1; width: 100%; aspect-ratio: 4 / 3; height: auto; }
+  .zod ul { grid-template-columns: 1fr; }
+  .zod li { grid-template-columns: 72px 1fr; }
+  .zod li img { width: 72px; height: 52px; }
+  .years { padding: 120px 18px; }
+  .years .cols { columns: 1; text-align: start; }
+  .foot { padding: 48px 16px 24px; }
+  .foot .name { font-size: 15vw; }
+  .foot-row { display: block; margin-top: 40px; }
+  .credits { margin-top: 32px; }
+  .legal { margin-top: 48px; }
+}
+</style></head><body>
+<section class="hero f-sunset" id="top">
+  <nav class="bar" aria-label="ראשי">
+    <a class="mark" href="#top">קידוש החודש</a>
+    <a class="hide-s" href="#month">החודש</a>
+    <a class="hide-s" href="#count">החשבון</a>
+    <a class="hide-s" href="#mazalot">המזלות</a>
+    <a class="btn" href="#month">לגלול את החודש</a>
+  </nav>
+  <div class="hero-body">
+    <h1 aria-label="כ״ט י״ב תשצ״ג: אורך החודש"><span class="l l1"><span>כ״ט י״ב</span></span><span class="l l2"><span>תשצ״ג</span></span></h1>
+    <p class="hero-lead">29 ימים, 12 שעות ו־793 חלקים: הזמן ממולד למולד. כאן רואים איך זה קורה בשמיים, בתלת־ממד.</p>
+    <div class="hero-scene" tabindex="0" role="img" aria-label="השמש, כדור הארץ והירח בתלת־ממד. גוררים הצידה כדי לסובב."></div>
+    <p class="hero-act"><a class="btn" href="#month">לגלול את החודש</a></p>
+  </div>
+</section>
+
+<section class="story" id="month" aria-labelledby="month-title">
+  <div class="stage" data-field="gold">
+    <div class="stage-text">
+      <h2 id="month-title">חודש אחד, בגלילה</h2>
+      <div class="steps"><article class="step on"><p class="day">יום 0</p><h3>מולד</h3><p>הירח עובר בין כדור הארץ לשמש. הצד המואר שלו פונה לשמש, ומכאן רואים רק את הצד החשוך.</p></article><article class="step"><p class="day">יום 1</p><h3>ראיית הלבנה</h3><p>יום אחרי המולד הירח כבר רחוק כ־13° מהשמש. מיד אחרי השקיעה רואים קשת דקה במערב.</p></article><article class="step"><p class="day">יום 7</p><h3>רבע ראשון</h3><p>הירח בזווית ישרה לשמש. מכדור הארץ רואים חצי ממנו מואר.</p></article><article class="step"><p class="day">יום 15</p><h3>מילוא</h3><p>הירח מאחורי כדור הארץ, מול השמש. כל הצד שפונה אלינו מואר.</p></article><article class="step"><p class="day">יום 22</p><h3>רבע אחרון</h3><p>שוב חצי מואר, אבל החצי השני. רואים אותו לפנות בוקר, ואחריו מגיע מולד חדש.</p></article></div>
+    </div>
+    <div class="stage-scene" tabindex="0" role="img" aria-label="השמש, כדור הארץ והירח. בעיגול: הירח כפי שרואים אותו מכדור הארץ."></div>
+  </div>
+</section>
+
+<section class="band f-night" id="seen">
+  <h2>כך נראה החודש מכאן</h2>
+  <figure class="clip" data-rise>
+    <video src="img/phases.webm" poster="img/phases.jpg" width="480" height="480" muted loop playsinline autoplay preload="metadata" aria-label="הדמיה: הירח כפי שנראה מכדור הארץ לאורך חודש, ממולד למולד"></video>
+    <figcaption>חודש שלם בשש שניות: הירח כפי שנראה מכדור הארץ, ממולד למולד. הדמיה של אוקטובר 2007.</figcaption>
+  </figure>
+  <figure class="photo" data-rise style="--d:90ms">
+    <img src="img/earthshine.jpg" width="1400" height="858" alt="סהר דק נמוך מעל רכס הרים אחרי השקיעה, וחלקו החשוך של הירח מואר קלות" loading="lazy">
+    <figcaption>סהר דק אחרי השקיעה, ממש כמו ביום שאחרי המולד. החלק החשוך מואר קלות באור שחוזר מכדור הארץ.</figcaption>
+  </figure>
+</section>
+
+<section class="count f-charcoal" id="count">
+  <h2>החשבון של החודש, לפי הרמב״ם</h2>
+  <div class="tile tile-a" data-rise><b>29 ימים</b><span>ממולד למולד, בממוצע. לכן חודש עברי הוא פעם 29 ימים ופעם 30.</span></div>
+  <div class="tile tile-b" data-rise style="--d:80ms"><b>12 שעות</b><span>חצי יום נוסף.</span></div>
+  <div class="tile tile-c" data-rise style="--d:160ms"><b>793 חלקים</b><span>בשעה יש 1080 חלקים, וחלק הוא 3⅓ שניות. אז 793 חלקים הם 44 דקות ו־3⅓ שניות.</span></div>
+</section>
+
+<section class="why f-dusk" id="why">
+  <div class="why-text">
+    <h2>למה 29.5 ולא 27.3?</h2>
+    <p class="statement" data-rise style="--d:80ms">הירח מקיף את כדור הארץ ב־27 ימים ו־7 שעות. אבל בינתיים כדור הארץ זז סביב השמש, והירח צריך עוד יומיים כדי להשיג אותה.</p>
+    <p data-rise style="--d:160ms">רק כשהוא שוב בין כדור הארץ לשמש יש מולד. לכן החודש של הלוח ארוך מסיבוב אחד של הירח.</p>
+  </div>
+  <figure data-rise style="--d:120ms">
+    <img src="img/galileo.jpg" width="1400" height="931" alt="ספרו של גלילאו פתוח, ובו שני ציורים של הירח, חציו מואר וחציו חשוך" loading="lazy">
+    <figcaption>גלילאו, 1610: הירח בשני מופעים, כמו שראה אותו בטלסקופ. הקו בין האור לחושך זז עם החודש.</figcaption>
+  </figure>
+</section>
+
+<section class="road f-charcoal" id="road">
+  <div class="road-intro">
+    <h2>מהמולד לראש חודש</h2>
+    <p data-rise style="--d:80ms">בזמן הסנהדרין קבעו את ראש החודש לפי עדים שראו את הירח החדש. כך זה עבד, שלב אחרי שלב. לוחצים על שלב כדי לפתוח אותו.</p>
+  </div>
+  <div class="acc"><div class="panel p1"><button type="button" aria-expanded="false" aria-controls="road-0"><span class="name">המולד</span></button><p class="body" id="road-0">הירח בין כדור הארץ לשמש. אי אפשר לראות אותו.</p></div><div class="panel p2 open"><button type="button" aria-expanded="true" aria-controls="road-1"><span class="name">הראייה</span></button><p class="body" id="road-1">בערך יום אחרי, קשת דקה במערב מיד אחרי השקיעה.</p><img src="img/crescent.jpg" alt="סהר דק בשמי השקיעה" width="900" height="600" loading="lazy"></div><div class="panel p3"><button type="button" aria-expanded="false" aria-controls="road-2"><span class="name">העדים</span></button><p class="body" id="road-2">מי שראה את הירח החדש בא לבית הדין בירושלים והעיד.</p></div><div class="panel p4"><button type="button" aria-expanded="false" aria-controls="road-3"><span class="name">הבדיקה</span></button><p class="body" id="road-3">בית הדין שאל איפה ראו את הירח, לאיזה צד נטה וכמה היה גבוה, ובדק לפי החשבון.</p></div><div class="panel p5"><button type="button" aria-expanded="false" aria-controls="road-4"><span class="name">הקידוש</span></button><p class="body" id="road-4">ראש בית הדין אומר ״מקודש״, וכל העם עונה אחריו ״מקודש, מקודש״.</p></div><div class="panel p6"><button type="button" aria-expanded="false" aria-controls="road-5"><span class="name">המשואות</span></button><p class="body" id="road-5">משואות אש על ראשי ההרים, מהר המשחה והלאה, הודיעו לכל הארץ שהחודש התקדש.</p><img src="img/olives.jpg" alt="ירושלים במבט מהר הזיתים, בסביבות 1900" width="900" height="600" loading="lazy"></div></div>
+</section>
+
+<section class="zod f-silver" id="mazalot">
+  <div class="zod-head"><h2>12 המזלות</h2><p>360° בשמיים, 30° לכל מזל</p></div>
+  <ul><li data-rise style="--d:0ms"><img src="img/z-aries.jpg" width="96" height="68" alt="איור של מזל טלה מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>טלה</b><span>ניסן</span></div><p>תחילת האביב. כאן השמש ביום השוויון של האביב: תקופת ניסן.</p></div></li><li data-rise style="--d:70ms"><img src="img/z-taurus.jpg" width="96" height="68" alt="איור של מזל שור מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>שור</b><span>אייר</span></div><p>השמש עוברת בו בחודש אייר, בערך.</p></div></li><li data-rise style="--d:0ms"><img src="img/z-gemini.jpg" width="96" height="68" alt="איור של מזל תאומים מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>תאומים</b><span>סיוון</span></div><p>השמש עוברת בו בחודש סיוון, בערך.</p></div></li><li data-rise style="--d:70ms"><img src="img/z-cancer.jpg" width="96" height="68" alt="איור של מזל סרטן מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>סרטן</b><span>תמוז</span></div><p>תחילת הקיץ, היום הארוך בשנה: תקופת תמוז.</p></div></li><li data-rise style="--d:0ms"><img src="img/z-leo.jpg" width="96" height="68" alt="איור של מזל אריה מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>אריה</b><span>אב</span></div><p>השמש עוברת בו בחודש אב, בערך.</p></div></li><li data-rise style="--d:70ms"><img src="img/z-virgo.jpg" width="96" height="68" alt="איור של מזל בתולה מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>בתולה</b><span>אלול</span></div><p>השמש עוברת בו בחודש אלול, בערך.</p></div></li><li data-rise style="--d:0ms"><img src="img/z-libra.jpg" width="96" height="68" alt="איור של מזל מאזניים מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>מאזניים</b><span>תשרי</span></div><p>תחילת הסתיו. היום והלילה שווים: תקופת תשרי.</p></div></li><li data-rise style="--d:70ms"><img src="img/z-scorpio.jpg" width="96" height="68" alt="איור של מזל עקרב מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>עקרב</b><span>חשוון</span></div><p>השמש עוברת בו בחודש חשוון, בערך.</p></div></li><li data-rise style="--d:0ms"><img src="img/z-sagittarius.jpg" width="96" height="68" alt="איור של מזל קשת מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>קשת</b><span>כסלו</span></div><p>השמש עוברת בו בחודש כסלו, בערך.</p></div></li><li data-rise style="--d:70ms"><img src="img/z-capricornus.jpg" width="96" height="68" alt="איור של מזל גדי מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>גדי</b><span>טבת</span></div><p>תחילת החורף, הלילה הארוך בשנה: תקופת טבת.</p></div></li><li data-rise style="--d:0ms"><img src="img/z-aquarius.jpg" width="96" height="68" alt="איור של מזל דלי מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>דלי</b><span>שבט</span></div><p>השמש עוברת בו בחודש שבט, בערך.</p></div></li><li data-rise style="--d:70ms"><img src="img/z-pisces.jpg" width="96" height="68" alt="איור של מזל דגים מתוך אטלס כוכבים משנת 1825" loading="lazy"><div><div class="row"><b>דגים</b><span>אדר</span></div><p>השמש עוברת בו בחודש אדר, בערך.</p></div></li></ul>
+</section>
+
+<section class="years f-charcoal" id="years">
+  <h2>שנת חמה, שנת לבנה</h2>
+  <div class="cols" data-rise style="--d:80ms">
+    <p><strong>שנת חמה</strong>, מתקופה לתקופה, היא <span class="hl hl-gold">365 ימים ו־6 שעות</span> לפי שמואל. שנים־עשר חודשים של מולד הם רק <span class="hl hl-silver">354 ימים, 8 שעות ו־876 חלקים</span>. ההפרש הוא <span class="hl hl-sun">כמעט 11 ימים</span> בכל שנה. בלי תיקון, פסח היה מקדים בכל שנה, ואחרי כמה שנים היה יוצא בחורף. אבל התורה אומרת ״שמור את חודש האביב״. לכן מוסיפים מדי פעם חודש שלם, <span class="hl hl-dusk">אדר ב׳</span>. 19 שנות חמה הן כמעט בדיוק 235 חודשים, וההפרש הוא רק שעה ו־485 חלקים. בכל מחזור של 19 שנה יש <span class="hl hl-gold">7 שנים מעוברות</span>: 3, 6, 8, 11, 14, 17 ו־19. הסימן: <span class="hl hl-silver">גו״ח אדז״ט</span>. <a class="hl hl-link" href="../lesson.html">ללמוד את כל זה צעד אחר צעד.</a></p>
+  </div>
+</section>
+
+<footer class="foot f-sunset">
+  <p class="name" aria-hidden="true">קידוש החודש</p>
+  <div class="foot-row">
+    <nav class="places" aria-label="עוד דגמים">
+      <a href="../lesson.html">השיעור המודרך</a>
+      <a href="../">הדגם המכני</a>
+      <a href="../real.html">שמש, ארץ וירח בתלת־ממד</a>
+    </nav>
+    <div class="credits">
+      <p>מפות כדור הארץ והירח: <bdi>NASA</bdi></p>
+      <p>איורי המזלות: <bdi>Sidney Hall, Urania's Mirror (1825)</bdi>, נחלת הכלל, <a href="https://commons.wikimedia.org/wiki/Category:Urania%27s_Mirror"><bdi>Wikimedia Commons</bdi></a></p>
+      <p><a href="https://commons.wikimedia.org/wiki/File:Thin_Crescent_Moon_in_Sunset_Sky.jpg">סהר בשקיעה</a>: <bdi>Carl Young, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a></bdi></p>
+      <p><a href="https://commons.wikimedia.org/wiki/File:Galileo_Galilei,_Sidericus_Nuncius,_facsimile,_Museo_Galileo,_Florence,_224095r.jpg">הספר של גלילאו</a>: <bdi>Zde, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a></bdi></p>
+      <p><a href="https://www.flickr.com/photos/50398299@N08/16386116037">ירושלים מהר הזיתים</a>: <bdi>Library of Congress via Fæ, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></bdi></p>
+      <p><a href="https://commons.wikimedia.org/wiki/File:The_crescent_Moon_and_earthshine.jpg">סהר ואור ארצי</a>: <bdi>ESO/B. Tafreshi/TWAN, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></bdi></p>
+      <p><a href="https://commons.wikimedia.org/wiki/File:Lunar_libration_with_phase_Oct_2007_HD_30fps.webm">חודש בשש שניות</a>: <bdi><a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0</a></bdi></p>
+    </div>
+  </div>
+  <div class="legal"><span>הכול לפי התנועה האמצעית בהלכות קידוש החודש לרמב״ם. בדגם המרחקים מקוצרים והירח מוגדל.</span><a class="link" href="#top">חזרה למעלה</a></div>
+</footer><script>// The model behind the tellurion: mean (uniform) motions, as in the
+// calendar of Rambam, Hilchot Kiddush HaChodesh 6. Pure, no DOM.
+const PARTS_PER_HOUR = 1080;
+const SYNODIC = 29 + (12 + 793 / PARTS_PER_HOUR) / 24; // 29d 12h 793p
+const YEAR = 365.25; // shnat Shmuel: 365d 6h
+const SIDEREAL = 1 / (1 / SYNODIC + 1 / YEAR);
+const VISIBLE_AT = 12; // degrees from the sun: first crescent in this model
+const MAZALOT = ["טלה", "שור", "תאומים", "סרטן", "אריה", "בתולה", "מאזניים", "עקרב", "קשת", "גדי", "דלי", "דגים"];
+
+const mod = (value, by) => ((value % by) + by) % by;
+
+// t: days since a mean molad at which the sun stands at the start of Taleh.
+function stateAt(t) {
+  const sun = mod((360 * t) / YEAR, 360);
+  let age = mod(t, SYNODIC);
+  if (age > SYNODIC - 1e-4) age = 0; // a molad reached from below
+  const elong = (360 * age) / SYNODIC;
+  const moon = mod(sun + elong, 360);
+  const lastMolad = t - age;
+  return {
+    t,
+    sun,
+    moon,
+    earth: mod(sun + 180, 360),
+    elong,
+    age,
+    lastMolad,
+    moladSun: mod((360 * lastMolad) / YEAR, 360),
+    lit: (1 - Math.cos((elong * Math.PI) / 180)) / 2,
+  };
+}
+
+// days -> { d, h, p }: days, hours and chalakim (1080 per hour)
+function dhp(days) {
+  const parts = Math.round(days * 24 * PARTS_PER_HOUR);
+  const d = Math.floor(parts / (24 * PARTS_PER_HOUR));
+  const rest = parts - d * 24 * PARTS_PER_HOUR;
+  const h = Math.floor(rest / PARTS_PER_HOUR);
+  return { d, h, p: rest - h * PARTS_PER_HOUR };
+}
+
+function mazalOf(longitude) {
+  return MAZALOT[Math.floor(mod(longitude, 360) / 30)];
+}
+
+function phaseOf(elong) {
+  if (elong < 6 || elong >= 354) return "מולד: הירח בין כדור הארץ לשמש";
+  if (elong < VISIBLE_AT) return "אחרי המולד: עוד צמוד לשמש ולא נראה";
+  if (elong < 84) return "סהר שהולך וגדל, נראה במערב בערב";
+  if (elong < 96) return "רבע ראשון: חצי מואר";
+  if (elong < 174) return "יותר מחצי מואר, הולך ומתמלא";
+  if (elong < 186) return "מילוא: ירח מלא, מול השמש";
+  if (elong < 264) return "מתחיל לחסור";
+  if (elong < 276) return "רבע אחרון: חצי מואר";
+  return "סהר שהולך וקטן, נראה רק לפנות בוקר";
+}
+
+// mountScene(el, opts): the sun, the earth and the moon as real 3D balls (WebGL ray tracing),
+// drawn straight onto the page's colour field (transparent canvas), with a porthole that shows
+// the moon as seen from the earth. Needs stateAt / SYNODIC from model.mjs.
+function mountScene(el, opts = {}) {
+  const RAD = Math.PI / 180;
+  const TAU = Math.PI * 2;
+  const M = { RM: 5, MOON_R: 0.5, SUN_D: 10, SUN_R: 2, TILT: 23.44 * RAD, INC: 5.145 * RAD, NODE_DAYS: 6798.38, NODE0: 75, NOON_LON: 25 * RAD };
+  const v3 = (x, y, z) => [x, y, z];
+  const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const mul = (a, s) => [a[0] * s, a[1] * s, a[2] * s];
+  const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const len = (a) => Math.hypot(a[0], a[1], a[2]);
+  const norm = (a) => mul(a, 1 / (len(a) || 1));
+  const wrap = (x, m) => ((x % m) + m) % m;
+  const AXIS = v3(0, Math.sin(M.TILT), Math.cos(M.TILT));
+  const AX1 = v3(1, 0, 0);
+  const AX2 = cross(AXIS, AX1);
+  const latAt = (lam, t) => Math.asin(Math.sin(M.INC) * Math.sin((lam - wrap(M.NODE0 - (360 * t) / M.NODE_DAYS, 360)) * RAD)) / RAD;
+
+  function sceneAt(t) {
+    const st = stateAt(t);
+    const le = st.earth * RAD;
+    const E = v3(M.SUN_D * Math.cos(le), M.SUN_D * Math.sin(le), 0);
+    const b = latAt(st.moon, t) * RAD;
+    const lm = st.moon * RAD;
+    const Mo = add(E, v3(M.RM * Math.cos(b) * Math.cos(lm), M.RM * Math.cos(b) * Math.sin(lm), M.RM * Math.sin(b)));
+    const L = norm(mul(E, -1));
+    const R = Math.atan2(dot(L, AX2), dot(L, AX1)) - M.NOON_LON;
+    const EB1 = add(mul(AX1, Math.cos(R)), mul(AX2, Math.sin(R)));
+    const EB2 = add(mul(AX1, -Math.sin(R)), mul(AX2, Math.cos(R)));
+    const MB1 = norm(v3(E[0] - Mo[0], E[1] - Mo[1], 0));
+    return { st, E, Mo, L, EB1, EB2, MB1, MB2: cross(v3(0, 0, 1), MB1) };
+  }
+
+  const glc = document.createElement("canvas");
+  const over = document.createElement("canvas");
+  glc.className = "sc-gl";
+  over.className = "sc-over";
+  el.append(glc, over);
+  const octx = over.getContext("2d");
+  const gl = glc.getContext("webgl", { antialias: false, premultipliedAlpha: true, alpha: true });
+  if (!gl) el.classList.add("sc-nogl");
+
+  const FS = `
+precision highp float;
+uniform vec2 uRes, uOff; uniform vec3 uCam, uRight, uUp, uFwd; uniform float uTan, uInset;
+uniform vec3 uEarth, uMoon, uL; uniform float uMoonR, uSunR, uGlow;
+uniform vec3 uEB1, uEB2, uEN, uMB1, uMB2;
+uniform sampler2D uDay, uNight, uLuna;
+const float PI = 3.14159265;
+float hit(vec3 ro, vec3 rd, vec3 c, float r){ vec3 oc = ro - c; float b = dot(oc, rd); float h = b*b - (dot(oc, oc) - r*r); if (h < 0.) return -1.; float t = -b - sqrt(h); return t > 0. ? t : -1.; }
+float hash(vec3 p){ p = fract(p*0.3183099 + vec3(.1,.17,.13)); p *= 17.0; return fract(p.x*p.y*p.z*(p.x+p.y+p.z)); }
+vec3 lin(vec3 c){ return c*c; }
+vec2 uvOf(vec3 n, vec3 b1, vec3 b2, vec3 ax){ return vec2(atan(dot(n,b2), dot(n,b1))/(2.*PI)+.5, .5 - asin(clamp(dot(n,ax),-1.,1.))/PI); }
+void main(){
+  vec2 q = ((gl_FragCoord.xy - uOff) / uRes) * 2. - 1.;
+  float ring = length(q);
+  if (uInset > .5 && ring > 1.) discard;
+  vec3 rd = normalize(uFwd + q.x * uTan * (uRes.x/uRes.y) * uRight + q.y * uTan * uUp);
+  vec3 ro = uCam;
+  float tS = uInset > .5 ? -1. : hit(ro, rd, vec3(0.), uSunR);
+  float tE = uInset > .5 ? -1. : hit(ro, rd, uEarth, 1.);
+  float tM = hit(ro, rd, uMoon, uMoonR);
+  float t = 1e9; int k = 0;
+  if (tS > 0. && tS < t) { t = tS; k = 1; }
+  if (tE > 0. && tE < t) { t = tE; k = 2; }
+  if (tM > 0. && tM < t) { t = tM; k = 3; }
+  vec3 col = vec3(0.); float a = 0.;
+  if (uInset > .5) { col = vec3(.012,.016,.035); a = 1.; }
+  if (k == 1) {
+    vec3 n = normalize(ro + rd*t);
+    col = vec3(1., .8, .45) * (.6 + .4*pow(max(dot(n, -rd), 0.), .45)) * 8.; a = 1.;
+  } else if (k == 2) {
+    vec3 n = normalize(ro + rd*t - uEarth);
+    vec2 uv = uvOf(n, uEB1, uEB2, uEN);
+    vec3 day = lin(texture2D(uDay, uv).rgb);
+    vec3 night = lin(texture2D(uNight, uv).rgb);
+    float d = dot(n, uL);
+    float ocean = smoothstep(.04, .14, day.b - max(day.r, day.g));
+    float spec = pow(max(dot(n, normalize(uL - rd)), 0.), 60.) * ocean * max(d, 0.) * 1.5;
+    col = day * max(d, 0.) * 2.6 + vec3(1.,.95,.85) * spec;
+    col += night * vec3(1.,.8,.5) * 1.3 * (1. - smoothstep(-.18, .04, d));
+    col += vec3(.25,.5,1.) * pow(1. - max(dot(n, -rd), 0.), 2.6) * smoothstep(-.25, .5, d) * .9;
+    col += vec3(.02,.03,.06) + day * .03; a = 1.;
+  } else if (k == 3) {
+    vec3 n = normalize(ro + rd*t - uMoon);
+    vec3 alb = lin(texture2D(uLuna, uvOf(n, uMB1, uMB2, vec3(0.,0.,1.))).rgb);
+    float d = dot(n, uL);
+    float ls = d > 0. ? 2.*d/(d + max(dot(n, -rd), 0.) + .05) : 0.;
+    col = alb * ls * 1.7;
+    vec3 toE = normalize(uEarth - uMoon);
+    col += alb * max(dot(n, toE), 0.) * (.5 + .5*dot(uL, -toE)) * .04;
+    col += uInset > .5 ? vec3(0.) : vec3(.03,.03,.04); a = 1.;
+  }
+  if (uInset < .5 && k != 1) {
+    float ds = length(ro); vec3 toS = -ro/ds;
+    float ang = atan(length(cross(rd, toS)), dot(rd, toS));
+    float ar = asin(clamp(uSunR/ds, 0., 1.));
+    float g = dot(rd, toS) > 0. ? pow(ar / max(ang, ar), 2.2) * .9 * smoothstep(ar * 4.5, ar * 1.6, ang) : 0.;
+    float edge = smoothstep(1., .72, max(abs(q.x), abs(q.y)));
+    if (k == 0) { col = vec3(1., .72, .38) * g * 1.4 * edge * uGlow; a = clamp(g * 1.1 * uGlow, 0., .9) * edge; }
+  }
+  col = sqrt(1. - exp(-col * 1.1));
+  if (uInset > .5) a *= smoothstep(1., .985, ring);
+  gl_FragColor = vec4(col * (k == 0 && uInset < .5 ? 1. : 1.), a);
+}`;
+  const U = {};
+  let loaded = 0;
+  if (gl) {
+    const sh = (type, src) => {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+      return s;
+    };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, "attribute vec2 p; void main(){ gl_Position = vec4(p,0.,1.); }"));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, "p");
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    "uGlow uRes uOff uCam uRight uUp uFwd uTan uInset uEarth uMoon uL uMoonR uSunR uEB1 uEB2 uEN uMB1 uMB2 uDay uNight uLuna".split(" ").forEach((n) => (U[n] = gl.getUniformLocation(prog, n)));
+    [["uDay", 0, opts.tex.day], ["uNight", 1, opts.tex.night], ["uLuna", 2, opts.tex.moon]].forEach(([name, unit, src]) => {
+      gl.uniform1i(U[name], unit);
+      const tex = gl.createTexture();
+      const img = new Image();
+      img.onload = () => {
+        gl.activeTexture(gl.TEXTURE0 + unit);
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        loaded++;
+        api.draw();
+      };
+      img.src = src;
+    });
+  }
+
+  const cam = { yaw: Math.PI, pitch: opts.pitch ?? 1.18, dist: opts.dist ?? 25, fov: 38, sway: 0, drag: 0 };
+  let t = opts.t ?? 0.6;
+  let sc = sceneAt(t);
+  let size = [0, 0, 1];
+  let inset = null;
+  function resize() {
+    const r = el.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const w = Math.max(1, Math.round(r.width));
+    const h = Math.max(1, Math.round(r.height));
+    if (w === size[0] && h === size[1] && dpr === size[2]) return;
+    size = [w, h, dpr];
+    for (const c of [glc, over]) {
+      c.width = Math.round(w * dpr);
+      c.height = Math.round(h * dpr);
+    }
+  }
+  function mainCamera() {
+    const sunAng = Math.atan2(sc.L[1], sc.L[0]);
+    const target = add(sc.E, mul(sc.L, 3.3));
+    const y = sunAng + cam.yaw + cam.drag + 0.4 * Math.sin(cam.sway);
+    const cp = Math.cos(cam.pitch);
+    const dir = v3(cp * Math.cos(y), cp * Math.sin(y), Math.sin(cam.pitch));
+    const aspect = size[0] / Math.max(1, size[1]);
+    const pos = add(target, mul(dir, cam.dist * Math.max(1, Math.pow(1.05 / aspect, 0.85))));
+    const fwd = mul(dir, -1);
+    const right = norm(cross(fwd, v3(0, 0, 1)));
+    return { pos, fwd, right, up: cross(right, fwd), tanH: Math.tan((cam.fov * RAD) / 2) };
+  }
+  function insetCamera() {
+    const look = norm(sub(sc.Mo, sc.E));
+    const pos = add(sc.E, look);
+    const right = norm(cross(look, v3(0, 0, 1)));
+    return { pos, fwd: look, right, up: cross(right, look), tanH: (M.MOON_R / len(sub(sc.Mo, pos))) * 1.4 };
+  }
+  function project(B, p, w, h) {
+    const v = sub(p, B.pos);
+    const z = dot(v, B.fwd);
+    if (z <= 0.01) return null;
+    return [w / 2 + (dot(v, B.right) / (z * B.tanH * (w / h))) * (w / 2), h / 2 - (dot(v, B.up) / (z * B.tanH)) * (h / 2)];
+  }
+  function hidden(B, p) {
+    const v = sub(p, B.pos);
+    const far = len(v);
+    const rd = mul(v, 1 / far);
+    for (const [c, r] of [[v3(0, 0, 0), M.SUN_R], [sc.E, 1], [sc.Mo, M.MOON_R]]) {
+      if (len(sub(p, c)) <= r * 1.001) continue;
+      const oc = sub(B.pos, c);
+      const b = dot(oc, rd);
+      const hh = b * b - (dot(oc, oc) - r * r);
+      if (hh > 0 && -b - Math.sqrt(hh) > 0 && -b - Math.sqrt(hh) < far) return true;
+    }
+    return false;
+  }
+  function pass(B, x, y, w, h, isInset) {
+    gl.viewport(x, y, w, h);
+    gl.uniform2f(U.uRes, w, h);
+    gl.uniform2f(U.uOff, x, y);
+    gl.uniform3fv(U.uCam, B.pos);
+    gl.uniform3fv(U.uRight, B.right);
+    gl.uniform3fv(U.uUp, B.up);
+    gl.uniform3fv(U.uFwd, B.fwd);
+    gl.uniform1f(U.uTan, B.tanH);
+    gl.uniform1f(U.uInset, isInset ? 1 : 0);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  function draw() {
+    resize();
+    const [w, h, dpr] = size;
+    sc = sceneAt(t);
+    const B = mainCamera();
+    inset = opts.inset ? opts.inset(w, h) : null;
+    if (gl && loaded >= 3) {
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.uniform3fv(U.uEarth, sc.E);
+      gl.uniform3fv(U.uMoon, sc.Mo);
+      gl.uniform3fv(U.uL, sc.L);
+      gl.uniform1f(U.uMoonR, M.MOON_R);
+      gl.uniform1f(U.uSunR, M.SUN_R);
+      gl.uniform1f(U.uGlow, opts.glow ? opts.glow() : 1);
+      gl.uniform3fv(U.uEB1, sc.EB1);
+      gl.uniform3fv(U.uEB2, sc.EB2);
+      gl.uniform3fv(U.uEN, AXIS);
+      gl.uniform3fv(U.uMB1, sc.MB1);
+      gl.uniform3fv(U.uMB2, sc.MB2);
+      pass(B, 0, 0, glc.width, glc.height, false);
+      if (inset) {
+        const s = Math.round(inset.r * 2 * dpr);
+        pass(insetCamera(), Math.round((inset.x - inset.r) * dpr), glc.height - Math.round((inset.y + inset.r) * dpr), s, s, true);
+      }
+    }
+    octx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    octx.clearRect(0, 0, w, h);
+    const ink = opts.ink ? opts.ink() : "#ffffff";
+    octx.lineWidth = 1.4;
+    octx.strokeStyle = ink;
+    octx.globalAlpha = 0.55;
+    octx.beginPath();
+    let on = false;
+    for (let i = 0; i <= 160; i++) {
+      const lam = (i / 160) * 360;
+      const b = latAt(lam, t) * RAD;
+      const p = add(sc.E, v3(M.RM * Math.cos(b) * Math.cos(lam * RAD), M.RM * Math.cos(b) * Math.sin(lam * RAD), M.RM * Math.sin(b)));
+      const s = !hidden(B, p) && project(B, p, w, h);
+      if (s) {
+        on ? octx.lineTo(s[0], s[1]) : octx.moveTo(s[0], s[1]);
+        on = true;
+      } else on = false;
+    }
+    octx.stroke();
+    octx.globalAlpha = 1;
+    const name = (p, r, words) => {
+      const s = project(B, p, w, h);
+      if (!s || hidden(B, p)) return;
+      const top = project(B, add(p, mul(B.up, r)), w, h);
+      const lift = top ? Math.abs(s[1] - top[1]) : 8;
+      octx.font = "600 14px Heebo, system-ui, sans-serif";
+      octx.textAlign = "center";
+      octx.fillStyle = ink;
+      octx.fillText(words, s[0], s[1] - lift - 8);
+    };
+    name(v3(0, 0, 0), M.SUN_R, "השמש");
+    name(sc.E, 1, "כדור הארץ");
+    name(sc.Mo, M.MOON_R, "הירח");
+    if (inset) {
+      octx.strokeStyle = ink;
+      octx.lineWidth = 2;
+      octx.beginPath();
+      octx.arc(inset.x, inset.y, inset.r + 4, 0, TAU);
+      octx.stroke();
+    }
+  }
+
+  // drag to turn (sideways only, so a phone can still scroll the page)
+  let down = null;
+  el.addEventListener("pointerdown", (e) => {
+    down = e.clientX;
+    el.setPointerCapture(e.pointerId);
+    api.touched = performance.now();
+  });
+  el.addEventListener("pointermove", (e) => {
+    if (down === null) return;
+    cam.drag -= (e.clientX - down) * 0.01;
+    down = e.clientX;
+    api.touched = performance.now();
+    draw();
+  });
+  const up = () => (down = null);
+  el.addEventListener("pointerup", up);
+  el.addEventListener("pointercancel", up);
+  el.addEventListener("keydown", (e) => {
+    const d = { ArrowLeft: 0.12, ArrowRight: -0.12 }[e.key];
+    if (d === undefined) return;
+    e.preventDefault();
+    cam.drag += d;
+    draw();
+  });
+
+  const api = {
+    draw,
+    touched: 0,
+    get t() { return t; },
+    set t(v) { t = v; },
+    get elong() { return sc.st.elong; },
+    sway(dt) { cam.sway += dt; },
+    cam,
+  };
+  return api;
+}
+
+// The page: the hero's live model, the month that the scroll drives, the road to rosh chodesh, entrances.
+document.documentElement.classList.remove("no-js");
+document.documentElement.classList.add("js");
+const still = matchMedia("(prefers-reduced-motion: reduce)");
+const TEX = { day: "img/earth-2048.jpg", night: "img/night-1024.jpg", moon: "img/moon-1024.jpg" };
+const seen = new WeakMap();
+const watch = new IntersectionObserver((list) => list.forEach((e) => seen.set(e.target, e.isIntersecting)), { rootMargin: "80px 0px" });
+
+// ---------- hero: the month running by itself ----------
+const heroEl = document.querySelector(".hero-scene");
+const hero = mountScene(heroEl, { tex: TEX, t: 1.2, ink: () => "#ffffff", pitch: 1.15, dist: 24 });
+watch.observe(heroEl);
+
+// ---------- the month, driven by the scroll ----------
+const story = document.querySelector(".story");
+const stage = story.querySelector(".stage");
+const stageEl = story.querySelector(".stage-scene");
+const steps = [...story.querySelectorAll(".step")];
+const FIELDS = ["gold", "dusk", "silver", "night", "sunset"];
+const TARGET = [0, 13, 90, 180, 270];
+const INKS = { gold: "#141414", dusk: "#ffffff", silver: "#141414", night: "#ffffff", sunset: "#ffffff" };
+let field = "gold";
+const month = mountScene(stageEl, {
+  tex: TEX,
+  t: 0,
+  ink: () => INKS[field],
+  glow: () => (field === "gold" || field === "silver" ? 0.35 : 0.8),
+  pitch: 1.2,
+  dist: 25,
+  inset: (w, h) => {
+    const r = Math.round(Math.min(w, h) * (w < 500 ? 0.17 : 0.13));
+    return { x: w - r - 18, y: h - r - 18, r };
+  },
+});
+watch.observe(stageEl);
+const ease = (x) => x * x * (3 - 2 * x);
+function progress() {
+  const r = story.getBoundingClientRect();
+  const span = r.height - innerHeight;
+  return Math.min(1, Math.max(0, -r.top / (span || 1)));
+}
+function placeMonth() {
+  const p = progress();
+  const seg = Math.min(4.999, p * 5);
+  const i = Math.floor(seg);
+  const local = seg - i;
+  const from = i ? TARGET[i - 1] : 0;
+  const e = from + (TARGET[i] - from) * ease(Math.min(1, local / 0.45));
+  month.t = (e / 360) * SYNODIC;
+  if (FIELDS[i] !== field) {
+    field = FIELDS[i];
+    stage.dataset.field = field;
+  }
+  steps.forEach((s, j) => s.classList.toggle("on", j === i));
+}
+
+// ---------- one loop for both scenes ----------
+let last = 0;
+function frame(now) {
+  const dt = last ? Math.min((now - last) / 1000, 1 / 20) : 1 / 60;
+  last = now;
+  if (seen.get(heroEl)) {
+    if (!still.matches) {
+      hero.t += dt * 1.6;
+      if (now - hero.touched > 3000) hero.sway(dt * 0.35);
+    }
+    hero.draw();
+  }
+  if (seen.get(stageEl)) {
+    placeMonth();
+    if (!still.matches && now - month.touched > 3000) month.sway(dt * 0.25);
+    month.draw();
+  }
+  requestAnimationFrame(frame);
+}
+placeMonth();
+hero.draw();
+month.draw();
+requestAnimationFrame(frame);
+
+// ---------- from molad to rosh chodesh ----------
+const panels = [...document.querySelectorAll(".panel")];
+panels.forEach((panel) => {
+  panel.querySelector("button").addEventListener("click", () => {
+    panels.forEach((p) => {
+      const open = p === panel;
+      p.classList.toggle("open", open);
+      p.querySelector("button").setAttribute("aria-expanded", String(open));
+    });
+  });
+});
+
+// ---------- entrances ----------
+const rise = new IntersectionObserver(
+  (list) =>
+    list.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add("in");
+        rise.unobserve(e.target);
+      }
+    }),
+  { rootMargin: "0px 0px -8% 0px" },
+);
+document.querySelectorAll("[data-rise]").forEach((el) => rise.observe(el));
+</script></body></html>
